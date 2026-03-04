@@ -7,14 +7,14 @@ import {
   LayoutDashboard,
   Users,
   BookOpen,
-  CreditCard,
-  Bell,
   Settings,
   LogOut,
   GraduationCap,
   ChevronRight,
   ClipboardList,
   FileText,
+  CreditCard,
+  Bell,
 } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
@@ -28,6 +28,7 @@ const menuItems = [
   { href: '/admin/finance', icon: CreditCard, label: 'Finance' },
   { href: '/admin/notifications', icon: Bell, label: 'Notifications' },
   { href: '/admin/settings', icon: Settings, label: 'Paramètres' },
+  { href: '/admin/teachers', icon: GraduationCap, label: 'Enseignants' },
 ];
 
 export const Sidebar = () => {

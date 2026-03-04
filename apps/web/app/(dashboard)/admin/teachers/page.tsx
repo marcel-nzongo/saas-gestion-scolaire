@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import {
   UserPlus, Search, Edit, Trash2,
-  Users, ChevronRight,
+  BookOpen, Users, ChevronRight,
 } from 'lucide-react';
 import { academicApi } from '@/lib/academic-api';
 import { Button } from '@/components/ui/Button';
@@ -21,15 +21,7 @@ interface Teacher {
   speciality?: string;
   hire_date?: string;
   is_active: boolean;
-  assignments?: {
-    id: string;
-    class_id: string;
-    class_name: string;
-    subject_id: string;
-    subject_name: string;
-    subject_color: string;
-    is_main_teacher: boolean;
-  }[];
+  assignments?: any[];
 }
 
 export default function TeachersPage() {
@@ -57,8 +49,8 @@ export default function TeachersPage() {
     try {
       const res = await academicApi.get('/teachers');
       setTeachers(res.data.data || []);
-    } catch {
-      console.error('Erreur chargement enseignants');
+    } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -74,13 +66,10 @@ export default function TeachersPage() {
       await loadTeachers();
       setShowModal(false);
       resetForm();
-    } catch (err: unknown) {
-      const error = err as { response?: { data?: { error?: { code?: string } } } };
-      alert(
-        error.response?.data?.error?.code === 'EMAIL_ALREADY_EXISTS'
-          ? 'Cet email est déjà utilisé'
-          : 'Erreur lors de la sauvegarde',
-      );
+    } catch (error: any) {
+      alert(error.response?.data?.error?.code === 'EMAIL_ALREADY_EXISTS'
+        ? 'Cet email est déjà utilisé'
+        : 'Erreur lors de la sauvegarde');
     }
   };
 
@@ -103,7 +92,7 @@ export default function TeachersPage() {
     try {
       await academicApi.delete(`/teachers/${id}`);
       await loadTeachers();
-    } catch {
+    } catch (error) {
       alert('Erreur lors de la suppression');
     }
   };
@@ -111,13 +100,8 @@ export default function TeachersPage() {
   const resetForm = () => {
     setEditingTeacher(null);
     setForm({
-      first_name: '',
-      last_name: '',
-      email: '',
-      phone: '',
-      gender: '',
-      speciality: '',
-      hire_date: '',
+      first_name: '', last_name: '', email: '',
+      phone: '', gender: '', speciality: '', hire_date: '',
     });
   };
 
@@ -167,7 +151,7 @@ export default function TeachersPage() {
           <Users className="w-12 h-12 text-gray-300 mx-auto mb-3" />
           <p className="text-gray-500 font-medium">Aucun enseignant trouvé</p>
           <p className="text-gray-400 text-sm mt-1">
-            {'Cliquez sur "Nouvel enseignant" pour commencer'}
+            Cliquez sur "Nouvel enseignant" pour commencer
           </p>
         </div>
       ) : (
@@ -218,9 +202,7 @@ export default function TeachersPage() {
                     <Trash2 className="w-4 h-4" />
                   </button>
                   <button
-                    onClick={() => {
-                      window.location.href = `/admin/teachers/${teacher.id}`;
-                    }}
+                    onClick={() => window.location.href = `/admin/teachers/${teacher.id}`}
                     className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
                   >
                     <ChevronRight className="w-4 h-4" />
@@ -238,7 +220,7 @@ export default function TeachersPage() {
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <h2 className="text-lg font-semibold text-gray-900">
-                {editingTeacher ? "Modifier l'enseignant" : 'Nouvel enseignant'}
+                {editingTeacher ? 'Modifier l\'enseignant' : 'Nouvel enseignant'}
               </h2>
               <button
                 onClick={() => { setShowModal(false); resetForm(); }}
@@ -329,7 +311,7 @@ export default function TeachersPage() {
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500 mb-1">
-                    {"Date d'embauche"}
+                    Date d'embauche
                   </label>
                   <input
                     type="date"
@@ -341,9 +323,8 @@ export default function TeachersPage() {
               </div>
               {!editingTeacher && (
                 <p className="text-xs text-gray-400 bg-gray-50 rounded-lg p-3">
-                  {'💡 Mot de passe par défaut : '}
-                  <strong>Password123</strong>
-                  {" — L'enseignant devra le changer à la première connexion."}
+                  💡 Mot de passe par défaut : <strong>Password123</strong>
+                  — L'enseignant devra le changer à la première connexion.
                 </p>
               )}
             </div>
@@ -355,7 +336,7 @@ export default function TeachersPage() {
                 Annuler
               </Button>
               <Button onClick={handleSubmit}>
-                {editingTeacher ? "Modifier l'enseignant" : "Créer l'enseignant"}
+                {editingTeacher ? 'Modifier' : 'Créer l\'enseignant'}
               </Button>
             </div>
           </div>
