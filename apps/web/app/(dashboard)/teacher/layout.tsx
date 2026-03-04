@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '@/store/auth.store';
 import { cn } from '@/lib/utils';
+import { MessageSquare } from 'lucide-react';
 
 const menuItems = [
   { href: '/teacher', icon: LayoutDashboard, label: 'Tableau de bord' },
@@ -17,6 +18,7 @@ const menuItems = [
   { href: '/teacher/grades', icon: ClipboardList, label: 'Saisie notes' },
   { href: '/teacher/reports', icon: FileText, label: 'Bulletins' },
   { href: '/teacher/resources', icon: BookOpen, label: 'Ressources' },
+  { href: '/teacher/forum', icon: MessageSquare, label: 'Forum' },
 ];
 
 export default function TeacherLayout({
