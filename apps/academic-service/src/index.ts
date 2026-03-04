@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import routes from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { env } from './config/env';
+import path from 'path';
+import express from 'express';
 
 const app = express();
 
@@ -14,6 +16,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(morgan('dev'));
 
 app.use('/api/v1', routes);
+// Dans la config de l'app, ajoute :
+app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
 app.get('/health', (req, res) => {
   res.json({

@@ -16,6 +16,7 @@ const menuItems = [
   { href: '/teacher/classes', icon: BookOpen, label: 'Mes classes' },
   { href: '/teacher/grades', icon: ClipboardList, label: 'Saisie notes' },
   { href: '/teacher/reports', icon: FileText, label: 'Bulletins' },
+  { href: '/teacher/resources', icon: BookOpen, label: 'Ressources' },
 ];
 
 export default function TeacherLayout({
