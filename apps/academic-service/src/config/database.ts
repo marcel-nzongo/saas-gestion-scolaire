@@ -1,6 +1,7 @@
 import knex, { Knex } from 'knex';
 import { env } from './env';
 
+// Connexion principale réutilisable
 export const db = knex({
   client: 'postgresql',
   connection: {
@@ -17,10 +18,12 @@ export const db = knex({
 const tenantConnections = new Map<string, Knex>();
 
 export const getTenantDb = (schemaName: string): Knex => {
+  // Réutiliser la connexion existante si disponible
   if (tenantConnections.has(schemaName)) {
     return tenantConnections.get(schemaName)!;
   }
 
+  // Créer une nouvelle connexion et la mettre en cache
   const connection = knex({
     client: 'postgresql',
     connection: {
