@@ -199,4 +199,21 @@ export class StudentService {
     await db('students').where({ id }).delete();
     await db('users').where({ id: student.user_id }).delete();
   }
+  
+  static async getByUserId(schemaName: string, userId: string) {
+  const db = getTenantDb(schemaName);
+  const student = await db('students as s')
+    .join('users as u', 's.user_id', 'u.id')
+    .leftJoin('classes as c', 's.class_id', 'c.id')
+    .where('s.user_id', userId)
+    .select(
+      's.*',
+      'u.first_name', 'u.last_name', 'u.email', 'u.avatar_url',
+      'c.name as class_name',
+    )
+    .first();
+
+  if (!student) throw { code: 'STUDENT_NOT_FOUND', status: 404 };
+  return student;
+}
 }

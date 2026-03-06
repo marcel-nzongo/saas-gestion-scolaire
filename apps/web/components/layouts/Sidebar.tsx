@@ -15,6 +15,8 @@ import {
   FileText,
   CreditCard,
   Bell,
+  Clock,
+  DollarSign
 } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
@@ -23,12 +25,14 @@ const menuItems = [
   { href: '/admin', icon: LayoutDashboard, label: 'Tableau de bord' },
   { href: '/admin/students', icon: Users, label: 'Élèves' },
   { href: '/admin/classes', icon: BookOpen, label: 'Classes' },
+  { href: '/admin/teachers', icon: GraduationCap, label: 'Enseignants' },
+  { href: '/admin/parents', icon: Users, label: 'Parents' },
   { href: '/admin/grades', icon: ClipboardList, label: 'Notes' },
   { href: '/admin/grades/reports', icon: FileText, label: 'Bulletins' },
-  { href: '/admin/finance', icon: CreditCard, label: 'Finance' },
+  { href: '/admin/attendance', icon: Clock, label: 'Absences & Retards' },
+  { href: '/admin/finance', icon: DollarSign, label: 'Finance' },
   { href: '/admin/notifications', icon: Bell, label: 'Notifications' },
   { href: '/admin/settings', icon: Settings, label: 'Paramètres' },
-  { href: '/admin/teachers', icon: GraduationCap, label: 'Enseignants' },
 ];
 
 export const Sidebar = () => {

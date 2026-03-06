@@ -12,6 +12,7 @@ const router = Router();
 router.use(authenticate);
 
 router.get('/', StudentController.getAll);
+router.get('/me', StudentController.getMe);
 router.get('/:id', StudentController.getById);
 router.post('/', validate(createStudentSchema), StudentController.create);
 router.put('/:id', validate(updateStudentSchema), StudentController.update);
