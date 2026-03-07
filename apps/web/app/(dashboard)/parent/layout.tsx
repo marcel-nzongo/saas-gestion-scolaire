@@ -5,11 +5,10 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
   LayoutDashboard, Users, FileText,
-  BookOpen, MessageSquare, LogOut,
+  BookOpen, MessageSquare, LogOut, Clock, DollarSign,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/auth.store';
 import { cn } from '@/lib/utils';
-import { Clock } from 'lucide-react';
 
 const menuItems = [
   { href: '/parent', icon: LayoutDashboard, label: 'Tableau de bord' },
