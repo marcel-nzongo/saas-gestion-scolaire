@@ -12,6 +12,7 @@ import resourceRoutes from './resource.routes';
 import parentRoutes from './parent.routes';
 import attendanceRoutes from './attendance.routes';
 import financeRoutes from './finance.routes';
+import notificationRoutes from './notification.routes';
 
 
 router.use('/students', studentRoutes);
@@ -21,6 +22,7 @@ router.use('/grades', gradeRoutes);
 router.use('/subjects', subjectRoutes);
 router.use('/resources', resourceRoutes);
 router.use('/attendances', attendanceRoutes);
+router.use('/notifications', notificationRoutes);
 
 // Dans la fonction setupRoutes, ajoute :
 router.use('/teachers', teacherRoutes);
