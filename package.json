@@ -2,6 +2,7 @@
   "name": "educore",
   "version": "0.0.1",
   "private": true,
+  "packageManager": "pnpm@10.28.0",
   "description": "Plateforme de gestion scolaire multi-tenant",
   "scripts": {
     "build": "turbo build",
