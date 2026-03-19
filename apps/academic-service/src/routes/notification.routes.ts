@@ -1,8 +1,8 @@
-import { Router } from 'express';
+import { Router, IRouter } from 'express';
 import { NotificationController } from '../controllers/notification.controller';
 import { authenticate } from '../middlewares/authenticate';
 
-const router = Router();
+const router: IRouter = Router();
 router.use(authenticate);
 
 router.post('/send', NotificationController.sendCustom);

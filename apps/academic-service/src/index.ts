@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -6,10 +6,8 @@ import routes from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { env } from './config/env';
 import path from 'path';
-import express from 'express';
 
-
-const app = express();
+const app: Express = express();
 
 app.use(helmet());
 app.use(cors({ origin: process.env.APP_URL || 'http://localhost:3000' }));

@@ -1,21 +1,25 @@
 'use client';
-
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
   LayoutDashboard, ClipboardList, BookOpen,
-  MessageSquare, LogOut, Clock,
+  MessageSquare, LogOut, Clock, FileText, Calendar, Shield,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/auth.store';
 import { cn } from '@/lib/utils';
+import { Video } from 'lucide-react';
 
 const menuItems = [
   { href: '/student', icon: LayoutDashboard, label: 'Tableau de bord' },
   { href: '/student/grades', icon: ClipboardList, label: 'Mes notes' },
+  { href: '/student/bulletins', icon: FileText, label: 'Mes bulletins' },
+  { href: '/student/timetable', icon: Calendar, label: 'Emploi du temps' },
+  { href: '/student/discipline', icon: Shield, label: 'Discipline' },
   { href: '/student/attendance', icon: Clock, label: 'Absences & Retards' },
   { href: '/student/resources', icon: BookOpen, label: 'Ressources' },
   { href: '/student/forum', icon: MessageSquare, label: 'Forum' },
+  { href: '/student/virtual-classes', icon: Video, label: 'Classe virtuelle' }
 ];
 
 export default function StudentLayout({ children }: { children: React.ReactNode }) {
@@ -25,9 +29,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
 
   useEffect(() => {
     if (!user) { router.push('/login'); return; }
-    if (user.role !== 'student' && user.role !== 'admin') {
-      router.push('/login');
-    }
+    if (user.role !== 'student' && user.role !== 'admin') router.push('/login');
   }, [user, router]);
 
   const handleLogout = async () => {
@@ -77,9 +79,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
               {user?.first_name?.[0]}{user?.last_name?.[0]}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white text-sm font-medium truncate">
-                {user?.first_name} {user?.last_name}
-              </p>
+              <p className="text-white text-sm font-medium truncate">{user?.first_name} {user?.last_name}</p>
               <p className="text-gray-400 text-xs truncate">{user?.email}</p>
             </div>
           </div>

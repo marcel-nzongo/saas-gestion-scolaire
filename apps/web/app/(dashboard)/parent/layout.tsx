@@ -1,22 +1,25 @@
 'use client';
-
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
   LayoutDashboard, Users, FileText,
-  BookOpen, MessageSquare, LogOut, Clock, DollarSign,
+  BookOpen, MessageSquare, LogOut, Clock, DollarSign, Calendar, Shield,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/auth.store';
 import { cn } from '@/lib/utils';
 
+
 const menuItems = [
   { href: '/parent', icon: LayoutDashboard, label: 'Tableau de bord' },
   { href: '/parent/children', icon: Users, label: 'Mes enfants' },
+  { href: '/parent/timetable', icon: Calendar, label: 'Emploi du temps' },
+  { href: '/parent/attendance', icon: Clock, label: 'Absences & Retards' },
+  { href: '/parent/bulletins', icon: FileText, label: 'Bulletins' },
+  { href: '/parent/finance', icon: DollarSign, label: 'Paiements' },
+  { href: '/parent/discipline', icon: Shield, label: 'Discipline' },
   { href: '/parent/resources', icon: BookOpen, label: 'Ressources' },
   { href: '/parent/forum', icon: MessageSquare, label: 'Forum' },
-  { href: '/parent/attendance', icon: Clock, label: 'Absences & Retards' },
-  { href: '/parent/finance', icon: DollarSign, label: 'Paiements' },
 ];
 
 export default function ParentLayout({ children }: { children: React.ReactNode }) {
@@ -26,9 +29,7 @@ export default function ParentLayout({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     if (!user) { router.push('/login'); return; }
-    if (user.role !== 'parent' && user.role !== 'admin') {
-      router.push('/login');
-    }
+    if (user.role !== 'parent' && user.role !== 'admin') router.push('/login');
   }, [user, router]);
 
   const handleLogout = async () => {
@@ -78,9 +79,7 @@ export default function ParentLayout({ children }: { children: React.ReactNode }
               {user?.first_name?.[0]}{user?.last_name?.[0]}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white text-sm font-medium truncate">
-                {user?.first_name} {user?.last_name}
-              </p>
+              <p className="text-white text-sm font-medium truncate">{user?.first_name} {user?.last_name}</p>
               <p className="text-gray-400 text-xs truncate">{user?.email}</p>
             </div>
           </div>

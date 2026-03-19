@@ -199,7 +199,7 @@ export class NotificationService {
       const phone = to.startsWith('+') ? to : `+221${to.replace(/^0/, '')}`;
 
       await axios.post(
-        `https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B${sender}/requests`,
+        `https://api.orange.com/orange-sms-sn/v2/outbound/tel%3A%2B${sender}/requests`,
         {
           outboundSMSMessageRequest: {
             address: [`tel:${phone}`],

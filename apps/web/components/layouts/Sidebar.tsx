@@ -13,13 +13,14 @@ import {
   ChevronRight,
   ClipboardList,
   FileText,
-  CreditCard,
   Bell,
   Clock,
-  DollarSign
+  DollarSign,
+  Calendar,
 } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
+import { Shield } from 'lucide-react';
 
 const menuItems = [
   { href: '/admin', icon: LayoutDashboard, label: 'Tableau de bord' },
@@ -29,10 +30,12 @@ const menuItems = [
   { href: '/admin/parents', icon: Users, label: 'Parents' },
   { href: '/admin/grades', icon: ClipboardList, label: 'Notes' },
   { href: '/admin/grades/reports', icon: FileText, label: 'Bulletins' },
+  { href: '/admin/timetable', icon: Calendar, label: 'Emploi du temps' },
   { href: '/admin/attendance', icon: Clock, label: 'Absences & Retards' },
   { href: '/admin/finance', icon: DollarSign, label: 'Finance' },
   { href: '/admin/notifications', icon: Bell, label: 'Notifications' },
   { href: '/admin/settings', icon: Settings, label: 'Paramètres' },
+  { href: '/admin/discipline', icon: Shield, label: 'Discipline' },
 ];
 
 export const Sidebar = () => {
@@ -59,7 +62,16 @@ export const Sidebar = () => {
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
         {menuItems.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive =
+            pathname === item.href ||
+            (item.href !== '/admin' &&
+              pathname.startsWith(item.href + '/') &&
+              !menuItems.some(
+                (other) =>
+                  other.href !== item.href &&
+                  other.href.startsWith(item.href + '/') &&
+                  pathname.startsWith(other.href),
+              ));
           return (
             <Link
               key={item.href}
